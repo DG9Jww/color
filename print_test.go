@@ -18,3 +18,15 @@ func TestPrintf(t *testing.T) {
 	PrintfError("I'm %s,how are you?", "888")
 	PrintfWarn("I'm %s,how are you?", "888")
 }
+
+func TestLogPrintln(t *testing.T) {
+	LogPrintlnInfo("This Info", 1, 1)
+	LogPrintlnError("This error", 1, 1)
+	LogPrintlnWarn("This warning", 1, 1)
+}
+
+func TestLogPrintf(t *testing.T) {
+	LogPrintfInfo("I'm %s,how are you?", "888")
+	LogPrintfError("I'm %s,how are you?", "888")
+	LogPrintfWarn("I'm %s,how are you?", "888")
+}

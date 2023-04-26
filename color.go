@@ -7,6 +7,8 @@ package color
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/fatih/color"
 )
 
@@ -19,7 +21,7 @@ const (
 
 // color
 var p = map[string]string{
-	INFO: color.BlueString(INFO),
+	INFO: color.CyanString(INFO),
 	ERRO: color.RedString(ERRO),
 	WARN: color.YellowString(WARN),
 }
@@ -62,4 +64,44 @@ func PrintfError(format string, a ...any) {
 func PrintfWarn(format string, a ...any) {
 	fmt.Print(p[WARN])
 	fmt.Printf(format, a...)
+}
+
+/*
+******
+logPrintln
+******
+*/
+func LogPrintlnInfo(a ...any) {
+	print(p[INFO])
+	log.Println(a...)
+}
+
+func LogPrintlnError(a ...any) {
+	print(p[ERRO])
+	log.Println(a...)
+}
+
+func LogPrintlnWarn(a ...any) {
+	print(p[WARN])
+	log.Println(a...)
+}
+
+/*
+******
+logPrintf
+******
+*/
+func LogPrintfInfo(format string, a ...any) {
+	print(p[INFO])
+	log.Printf(format, a...)
+}
+
+func LogPrintfError(format string, a ...any) {
+	print(p[ERRO])
+	log.Printf(format, a...)
+}
+
+func LogPrintfWarn(format string, a ...any) {
+	print(p[WARN])
+	log.Printf(format, a...)
 }
