@@ -1,4 +1,4 @@
-module github/DG9Jww/color
+module github.com/DG9Jww/color
 
 go 1.19
 
