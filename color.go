@@ -6,13 +6,12 @@
 package color
 
 import (
-	"fmt"
-	"log"
-
 	"github.com/fatih/color"
+	"log"
+	"os"
 )
 
-// prefix
+// builtin prefix
 const (
 	INFO = "[INFO]"
 	ERRO = "[ERRO]"
@@ -20,88 +19,37 @@ const (
 )
 
 // color
-var p = map[string]string{
-	INFO: color.CyanString(INFO),
-	ERRO: color.RedString(ERRO),
-	WARN: color.YellowString(WARN),
-}
+type Color int
 
-/*
-******
-println
-******
-*/
-func PrintlnInfo(a ...any) {
-	fmt.Print(p[INFO])
-	fmt.Println(a...)
-}
+const (
+	BLUE Color = iota
+	RED
+	YELLOW
+	BLACK
+	CYAN
+	GREEN
+	WHITE
+)
 
-func PrintlnError(a ...any) {
-	fmt.Print(p[ERRO])
-	fmt.Println(a...)
-}
+// builtin logger
+var (
+	WarnLogger  = NewPrefix(WARN, YELLOW)
+	InfoLogger  = NewPrefix(INFO, CYAN)
+	ErrorLogger = NewPrefix(ERRO, RED)
+)
 
-func PrintlnWarn(a ...any) {
-	fmt.Print(p[WARN])
-	fmt.Println(a...)
-}
-
-/*
-******
-printf
-******
-*/
-func PrintfInfo(format string, a ...any) {
-	fmt.Print(p[INFO])
-	fmt.Printf(format, a...)
-}
-
-func PrintfError(format string, a ...any) {
-	fmt.Print(p[ERRO])
-	fmt.Printf(format, a...)
-}
-
-func PrintfWarn(format string, a ...any) {
-	fmt.Print(p[WARN])
-	fmt.Printf(format, a...)
-}
-
-/*
-******
-logPrintln
-******
-*/
-func LogPrintlnInfo(a ...any) {
-	print(p[INFO])
-	log.Println(a...)
-}
-
-func LogPrintlnError(a ...any) {
-	print(p[ERRO])
-	log.Println(a...)
-}
-
-func LogPrintlnWarn(a ...any) {
-	print(p[WARN])
-	log.Println(a...)
-}
-
-/*
-******
-logPrintf
-******
-*/
-func LogPrintfInfo(format string, a ...any) {
-	print(p[INFO])
-	log.Printf(format, a...)
-}
-
-func LogPrintfError(format string, a ...any) {
-	print(p[ERRO])
-	log.Printf(format, a...)
-}
-
-func LogPrintfWarn(format string, a ...any) {
-	print(p[WARN])
-	log.Printf(format, a...)
+// 自定义prefix
+// 将传入的颜色和对应的染色函数对应上，我第一想法是使用map
+// 这里问的gpt，他竟然用数组完成，这是我没想到的，数组索引正好和颜色对应
+func NewPrefix(prefix string, colour Color) *log.Logger {
+	colors := []func(format string, a ...interface{}) string{
+		color.BlueString,
+		color.RedString,
+		color.YellowString,
+		color.BlackString,
+		color.CyanString,
+		color.GreenString,
+		color.WhiteString,
+	}
+	return log.New(os.Stdout, colors[colour](prefix), 0)
 }
