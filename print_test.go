@@ -30,3 +30,7 @@ func TestLogPrintf(t *testing.T) {
 	LogPrintfError("I'm %s,how are you?", "888")
 	LogPrintfWarn("I'm %s,how are you?", "888")
 }
+
+func TestLogP(t *testing.T) {
+	LogP()
+}

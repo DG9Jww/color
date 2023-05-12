@@ -8,6 +8,7 @@ package color
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/fatih/color"
 )
@@ -104,4 +105,14 @@ func LogPrintfError(format string, a ...any) {
 func LogPrintfWarn(format string, a ...any) {
 	print(p[WARN])
 	log.Printf(format, a...)
+}
+
+/*
+******
+test
+******
+*/
+func LogP() {
+	warn := log.New(os.Stdout, color.YellowString("[WARN]"), 0)
+	warn.Println("test")
 }
