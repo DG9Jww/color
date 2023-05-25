@@ -5,11 +5,11 @@
 
 package color
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewPrefix(t *testing.T) {
-	WarnLogger.Println("你好")
-	MyLogger := NewPrefix("[Vuln]", RED)
-	MyLogger.Println("Vulnerabilities..........")
+	out := NewPrefixWithTime("xx", GREEN)
+	out.Println("nihao")
 }
-

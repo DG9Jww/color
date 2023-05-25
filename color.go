@@ -6,17 +6,19 @@
 package color
 
 import (
-
-	"github.com/fatih/color"
+	"fmt"
 	"log"
 	"os"
+	"time"
+
+	"github.com/fatih/color"
 )
 
 // builtin prefix
 const (
-	INFO = "[INFO] "
-	ERRO = "[ERRO] "
-	WARN = "[WARN] "
+	INFO = "INFO "
+	ERRO = "ERRO "
+	WARN = "WARN "
 )
 
 // color
@@ -34,9 +36,9 @@ const (
 
 // builtin logger
 var (
-	WarnLogger  = NewPrefix(WARN, YELLOW)
-	InfoLogger  = NewPrefix(INFO, CYAN)
-	ErrorLogger = NewPrefix(ERRO, RED)
+	WarnLogger  = NewPrefixWithTime(WARN, YELLOW)
+	InfoLogger  = NewPrefixWithTime(INFO, CYAN)
+	ErrorLogger = NewPrefixWithTime(ERRO, RED)
 )
 
 // 自定义prefix
@@ -52,5 +54,22 @@ func NewPrefix(prefix string, colour Color) *log.Logger {
 		color.GreenString,
 		color.WhiteString,
 	}
-	return log.New(os.Stdout, colors[colour](prefix), 0)
+	return log.New(os.Stdout, fmt.Sprintf("[%s]", colors[colour](prefix)), 0)
+}
+
+func NewPrefixWithTime(prefix string, colour Color) *log.Logger {
+	t := time.Now()
+	timeFormat := color.HiGreenString(fmt.Sprintf("%02d:%02d:%02d", t.Hour(), t.Minute(), t.Second()))
+
+	colors := []func(format string, a ...interface{}) string{
+		color.BlueString,
+		color.RedString,
+		color.YellowString,
+		color.BlackString,
+		color.CyanString,
+		color.GreenString,
+		color.WhiteString,
+	}
+
+	return log.New(os.Stdout, fmt.Sprintf("[%s] [%s] ", timeFormat, colors[colour](prefix)), 0)
 }
