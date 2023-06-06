@@ -11,5 +11,6 @@ import (
 
 func TestNewPrefix(t *testing.T) {
 	out := NewPrefixWithTime("xx", GREEN)
+	ErrorLogger.Println("It's a error message")
 	out.Println("nihao")
 }

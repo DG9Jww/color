@@ -16,9 +16,9 @@ import (
 
 // builtin prefix
 const (
-	INFO = "INFO "
-	ERRO = "ERRO "
-	WARN = "WARN "
+	INFO = "INFO"
+	ERRO = "ERRO"
+	WARN = "WARN"
 )
 
 // color
@@ -32,6 +32,14 @@ const (
 	CYAN
 	GREEN
 	WHITE
+
+	FgHiRed = iota + 84
+	FgHiGreen
+	FgHiYellow
+	FgHiBlue
+	FgHiMagenta
+	FgHiCyan
+	FgHiWhite
 )
 
 // builtin logger
