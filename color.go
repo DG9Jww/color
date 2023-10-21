@@ -33,13 +33,13 @@ const (
 	GREEN
 	WHITE
 
-	FgHiRed = iota + 84
-	FgHiGreen
-	FgHiYellow
-	FgHiBlue
-	FgHiMagenta
-	FgHiCyan
-	FgHiWhite
+	// FgHiRed = iota + 84
+	// FgHiGreen
+	// FgHiYellow
+	// FgHiBlue
+	// FgHiMagenta
+	// FgHiCyan
+	// FgHiWhite
 )
 
 // builtin logger
